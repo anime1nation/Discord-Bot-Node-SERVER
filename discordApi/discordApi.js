@@ -41,6 +41,8 @@ client.on("interactionCreate", async (interaction) => {
     const { commandName, options, user } = interaction;
     console.log(user.username);
     if (!interaction.isCommand()) return;
+
+
     if (commandName === "ppcreateuser") {
       const username = options.getString("discordusername");
       const email = options.getString("email");
@@ -54,6 +56,8 @@ client.on("interactionCreate", async (interaction) => {
       const res = await apiCall({ path: "signup", method: "POST", body: body });
       await interaction.reply(res.message);
     }
+
+
     if (commandName === "ppcreateservice") {
       const serviceName = options.getString("servicename");
       const serviceLink = options.getString("servicelink");
@@ -72,11 +76,15 @@ client.on("interactionCreate", async (interaction) => {
       });
       await interaction.reply(res.message);
     }
+
+
     if (commandName === "ppgetuser") {
       const userName = options.getString("username");
       const res = await apiCall({ path: `users/${userName}`, method: "GET" });
       await interaction.reply(res.message);
     }
+
+    
   } catch (error) {
     await interaction.reply("Something went wrong!! Try again")
   }
