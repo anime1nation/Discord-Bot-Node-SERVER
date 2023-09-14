@@ -1,5 +1,5 @@
 import { REST, Routes } from 'discord.js';
-import {token} from './config.js'
+import {token,clientId} from './config.js'
 
 const commands = [
   {
@@ -69,7 +69,7 @@ const rest = new REST({ version: '10' }).setToken(token);
 try {
   console.log(`Started refreshing application (/${commands.map(x=>x.name)}) commands.`);
 
-  await rest.put(Routes.applicationCommands("1151091532821172274"), { body: commands });
+  await rest.put(Routes.applicationCommands(clientId), { body: commands });
 
   console.log(`Successfully reloaded application (/${commands.map(x=>x.name)}) commands.`);
 } catch (error) {
