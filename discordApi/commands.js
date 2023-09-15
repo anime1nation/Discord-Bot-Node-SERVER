@@ -1,5 +1,5 @@
 import { REST, Routes } from 'discord.js';
-import {token,clientId} from './config.js'
+import {token,clientId} from './config/config.js'
 // Creating commands for intraction
 const commands = [
   {

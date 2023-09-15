@@ -1,5 +1,5 @@
 import { Client, GatewayIntentBits } from "discord.js";
-import { localAPI, token } from "./config.js";
+import { localAPI, token } from "./config/config.js";
 import fetch from "node-fetch";
 
 const client = new Client({
