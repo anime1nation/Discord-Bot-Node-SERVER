@@ -2,8 +2,13 @@
  Node sercer for discord Bot . Feature intraction for CURD operation 
 
 
+
 to Run the server
 cd /discordApi
+
+install the node modules 
+
+npm install
 
 run 
 npm run dev
