@@ -18,5 +18,7 @@ bot link https://discord.gg/evEvByuQ
 intraction 
 
 /ppcreateuser - create user 
+
 /ppcreateservice - create service for login discord user (taken username from discord server) only login user can create own serive
+
 /ppgetuser - get user detail and respective service details
