@@ -9,6 +9,18 @@
     "start": "node discordApi.js",
     "dev": "nodemon --watch discordApi.js"
   },
+  "builds": [
+    {
+      "src": "discordApi.js",
+      "use": "@now/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "discordApi.js"
+    }
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
