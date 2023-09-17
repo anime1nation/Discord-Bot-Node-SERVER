@@ -1,5 +1,9 @@
 import { REST, Routes } from 'discord.js';
-import {token,clientId} from './config/config.js'
+import dotenv from 'dotenv';
+dotenv.config()
+const token = process.env.token
+const clientId = process.env.clientID
+
 // Creating commands for intraction
 const commands = [
   {
@@ -26,25 +30,37 @@ const commands = [
         },
       ]
   },
+  // {
+  //   name: 'ppcreateservice', //create service
+  //   description: 'This prompt will create a new service',
+  //   options: [
+  //       {
+  //         name: 'servicename',
+  //         description: 'serviceName for the user',
+  //         type: 3,
+  //         required: true,
+  //       },
+  //       {
+  //         name: 'servicelink',
+  //         description: 'serviceLink of the new service',
+  //         type: 3,
+  //         required: true,
+  //       },
+  //       {
+  //         name: 'monthlyfee',
+  //         description: 'monthlyFee for the new service',
+  //         type: 3,
+  //         required: true,
+  //       },
+  //     ],
+  // },
   {
-    name: 'ppcreateservice', //create service
-    description: 'This prompt will create a new service',
+    name: 'dictionary', //create service
+    description: 'This prompt will give meaning of any word',
     options: [
         {
-          name: 'servicename',
-          description: 'serviceName for the user',
-          type: 3,
-          required: true,
-        },
-        {
-          name: 'servicelink',
-          description: 'serviceLink of the new service',
-          type: 3,
-          required: true,
-        },
-        {
-          name: 'monthlyfee',
-          description: 'monthlyFee for the new service',
+          name: 'word',
+          description: 'Enter the word to get meaning of that word',
           type: 3,
           required: true,
         },

@@ -1,6 +1,11 @@
 import { Client, GatewayIntentBits } from "discord.js";
-import { localAPI, token } from "./config/config.js";
-import fetch from "node-fetch";
+import apiCall from "./api.js";
+import dotenv from 'dotenv';
+import dictonary from "./disctonay.js";
+dotenv.config()
+
+const localAPI = process.env.localAPI
+const token = process.env.token
 
 const client = new Client({
   intents: [
@@ -9,24 +14,6 @@ const client = new Client({
     GatewayIntentBits.MessageContent,
   ],
 });
-
-// API call for CRUD operations
-async function apiCall({ path, body, method }) {
-  return fetch(`${localAPI}/${path}`, {
-    method: method,
-    headers: {
-      "Content-Type": "application/json",
-    },
-    ...(body ? { body: JSON.stringify(body) } : {}),
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .catch((error) => {
-      console.error(error);
-      return "Something went Wrong Try again";
-    });
-}
 
 
 try {
@@ -40,7 +27,7 @@ client.once("ready", () => {
 client.on("messageCreate", (message) => {
   if (message.author.bot) return;
 
-  message.reply({ content: "Hey!! from bot!" });
+  message.reply({ content: "Hey!! from bot! Type /dictonary and write word I will give you the meaning of that wor 🖖" });
 });
 
 // check for any intraction by discord bot and perform action
@@ -66,6 +53,7 @@ client.on("interactionCreate", async (interaction) => {
       };
       //calling AOI to create user
       const res = await apiCall({
+        api:localAPI,
         path: "discord/signup",
         method: "POST",
         body: body 
@@ -75,28 +63,55 @@ client.on("interactionCreate", async (interaction) => {
     }
 
     //check for intraction
-    if (commandName === "ppcreateservice") {
-      const serviceName = options.getString("servicename");
-      const serviceLink = options.getString("servicelink");
-      const monthlyFee = options.getString("monthlyfee");
+    // if (commandName === "ppcreateservice") {
+    //   const serviceName = options.getString("servicename");
+    //   const serviceLink = options.getString("servicelink");
+    //   const monthlyFee = options.getString("monthlyfee");
+
+    //   // only login user can create their service
+    //   // getting username from intraction user detail i.e discord username
+
+    //   const body = {
+    //     username: user.username,
+    //     serviceName: serviceName,
+    //     serviceLink: serviceLink,
+    //     monthlyFee: monthlyFee,
+    //   };
+    //   // API call for creating service 
+    //   const res = await apiCall({
+    //     path: "discord/subscriptions",
+    //     method: "POST",
+    //     body: body,
+    //   });
+    //   // reply for the intraction 
+    //   await interaction.reply(res.message);
+    // }
+
+
+    if (commandName === "dictionary") {
+      const word = options.getString("word");
 
       // only login user can create their service
       // getting username from intraction user detail i.e discord username
 
       const body = {
         username: user.username,
-        serviceName: serviceName,
-        serviceLink: serviceLink,
-        monthlyFee: monthlyFee,
+        word: word,
       };
+
       // API call for creating service 
-      const res = await apiCall({
-        path: "discord/subscriptions",
-        method: "POST",
-        body: body,
-      });
+      // const res = await apiCall({
+      //   api:localAPI,
+      //   path: "discord/subscriptions",
+      //   method: "POST",
+      //   body: body,
+      // });
+
+      const getMeaning = await dictonary(word)
+      console.log("🚀 ~ file: discordApi.js:111 ~ client.on ~ getMeḁning:", getMeaning)
+
       // reply for the intraction 
-      await interaction.reply(res.message);
+      await interaction.reply(getMeaning);
     }
 
     // check for intraction
@@ -105,13 +120,16 @@ client.on("interactionCreate", async (interaction) => {
       const userName = options.getString("username");
       //API call to get all user data 
       const res = await apiCall({
-        path: `discord/users/${userName}`,
+        api:localAPI,
+        path: `discord/users/${user.userName}`,
         method: "GET"
       });
       // reply for the intraction 
       await interaction.reply(res.message);
     }
-
+    // else{
+    // await interaction.reply("Something went wrong!! Try again")
+    // }
     // error handling
   } catch (error) {
     await interaction.reply("Something went wrong!! Try again")
@@ -121,4 +139,5 @@ client.on("interactionCreate", async (interaction) => {
 client.login(token);
 } catch (error) {
   console.error(error);
+  await interaction.reply("Something went wrong!! Try again")
 }
