@@ -6,7 +6,7 @@
   "main": "discordApi.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node discordApi.js",
+    "start": "node /discordApi/discordApi.js",
     "dev": "nodemon --watch discordApi.js"
   },
   "keywords": [],

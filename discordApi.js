@@ -27,7 +27,7 @@ client.once("ready", () => {
 client.on("messageCreate", (message) => {
   if (message.author.bot) return;
 
-  message.reply({ content: "Hey!! from bot! Type /dictonary and write word I will give you the meaning of that wor 🖖" });
+  message.reply({ content: "Hey!! from bot! Type /dictionary and write word I will give you the meaning of that word 🖖" });
 });
 
 // check for any intraction by discord bot and perform action
@@ -108,7 +108,7 @@ client.on("interactionCreate", async (interaction) => {
       // });
 
       const getMeaning = await dictonary(word)
-      console.log("🚀 ~ file: discordApi.js:111 ~ client.on ~ getMeḁning:", getMeaning)
+      // console.log("🚀 ~ file: discordApi.js:111 ~ client.on ~ getMeḁning:", getMeaning)
 
       // reply for the intraction 
       await interaction.reply(getMeaning);
