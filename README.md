@@ -1,5 +1,5 @@
 # Discord Bot Node SERVER
- Node sercer for discord Bot . Feature intraction for CURD operation 
+ Node server for discord Bot . Feature Dictionary and intraction for CURD operation 
 
 
 
@@ -18,5 +18,7 @@ bot link https://discord.gg/evEvByuQ
 intraction 
 
 /ppcreateuser - create user 
+
 /dictionary - get meaning of any word 
+
 /ppgetuser - get user detail
