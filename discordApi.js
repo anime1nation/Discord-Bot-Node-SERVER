@@ -132,6 +132,7 @@ client.on("interactionCreate", async (interaction) => {
     // }
     // error handling
   } catch (error) {
+    console.log("🚀 ~ file: discordApi.js:135 ~ client.on ~ err̥or:", error)
     await interaction.reply("Something went wrong!! Try again")
   }
 });

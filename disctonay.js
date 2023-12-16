@@ -16,9 +16,16 @@ export default async function dictonary(search){
         // console.log("🚀 ~ file: disctonay.js:14 ~ dictonary ~ meaning:", meaning);
         // const {word,meanings} = meaning[0]
         
-        const d = `${meaning.map(({word,meanings})=>{return `Word: ${word} \n${meanings.map(x=>{return `\n\nPart of speech: ${x.partOfSpeech} \n${x.definitions.map(x=>{return `\n\nDefinition : ${x.definition} \nExample : ${x?.example || ""}`})} \n\nSynonyms: ${x?.synonyms || ""} \nAntonyms: ${x?.antonyms || ""}\n`})}`})}`
-        // console.log("🚀 ~ file: disctonay.js:21 ~ dictonary ~ d:", d)
-        return d
+        const result = `${meaning.map(({word,meanings})=>{return `Word: ${word} \n${meanings.map(x=>{return `\n\nPart of speech: ${x.partOfSpeech} \n${x.definitions.map(x=>{return `\n\nDefinition : ${x.definition} \nExample : ${x?.example || ""}`})} \n\nSynonyms: ${x?.synonyms || ""} \nAntonyms: ${x?.antonyms || ""}\n`})}`})}`
+        
+        const maxLength = 2000;
+        if (result.length > maxLength) {
+            const trimmedString = result.slice(0, maxLength);
+            return trimmedString; // Outputs the trimmed string
+        } else {
+            return result ; // Outputs the original string if it's not longer than maxLength
+        }
+
     // } catch (error) {
     //  return 'Not Found'
     // }
